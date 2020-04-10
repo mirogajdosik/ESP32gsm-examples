@@ -1,0 +1,268 @@
+<!--
+//=======================
+
+function CMDlineSTI(n,p) {
+ var r=">"
+ if(n==p) {
+  r=' class="menu_o">'
+ }
+ return r
+}
+ 
+function CMDline(n) {
+var p=0,r=""
+r+='<a href="index.html"'+CMDlineSTI(n,p)+'Home</a> | '
+p++
+r+='<a href="asetup.html"'+CMDlineSTI(n,p)+'Setup</a> | '
+p++
+r+='<a href="sms.html"'+CMDlineSTI(n,p)+'SMS</a> | '
+p++
+r+='<a href="eml.html"'+CMDlineSTI(n,p)+'Email</a> | '
+p++
+r+='<a href="event.html"'+CMDlineSTI(n,p)+'Event</a> | '
+p++
+r+='<a href="state.html"'+CMDlineSTI(n,p)+'State</a> | '
+p++
+r+='<a href="system.html"'+CMDlineSTI(n,p)+'System</a>'
+return r
+}
+
+function HD1(n,i) {
+var r='<div class="page">'
+r+='<h1>MIGA <span class="Htop">ESP32</span></h1>'
+r+='<div align="center">'
+r+='<div class="menu">'
+r+=CMDline(i)
+r+='</div>'
+r+='<hr />'
+r+='<h2><em>'+n+'</em></h2>'
+return r
+}
+
+
+
+
+function TB01(cs,n) {
+var r='<table width="600" border="0" cellpadding="2" cellspacing="1" class="base">'
+r+='<tr><th colspan="'+cs+'" class="table_top">'+n+'</th></tr>'
+return r
+}
+
+function TB3(n) {
+var r=TB01(3,n)
+r+='<tr><td width="160" class="nd">Name</td>'
+r+='<td width="220" class="nd">Value</td>'
+r+='<td width="220" class="nd">Description</td></tr>'
+return r
+}
+
+function TBV3x(t,n,v,desc,ml,pass) {
+var r='<tr><td>'+t+'</td>';
+r+='<td><input ';
+//'class="'+cl
+r+='style="width: ';
+if(ml>24) {
+  r+='210';
+} else if(ml>10) {
+  r+='140';
+} else {
+  r+='60';
+}
+r+='px" name="' +n+ '" type="';
+if(pass) r+='password';
+else r+='text';
+r+='" value="' +v;
+r+='" maxlength="'+ml+'" /></td>';
+r+='<td class="desc">'+desc+'</td></tr>';
+return r;
+}
+
+function TBV3(t,n,v,desc,ml) {
+return TBV3x(t,n,v,desc,ml,0);
+}
+
+function TBV3p(t,n,v,desc,ml) {
+return TBV3x(t,n,v,desc,ml,1);
+}
+
+function TB12sel(t,n,v,desc,values,names,poc) {
+var r='<tr><td>'+t+'</td>'
+var an=names.split(';')
+var ah=values.split(';')
+r+='<td>';
+r+='<select name="'+n+'" >'
+for(i=0;i<poc;i++) {
+      r+='<option value="'+ah[i]+'" '
+      if(v==ah[i]) {
+	  r+=" selected "
+      }
+      r+='>'+an[i]
+      r+='</option>'
+}
+r+='</select>'
+r+='</td>';
+r+='<td class="desc">'+desc+'</td></tr>'
+return r;
+}
+
+
+
+
+function TB21(n) {
+var r='<tr><td colspan="3"><div align="center">'
+r+='<input type="submit" name="'+n+'" value="Save" class="butsave" enabled />'
+r+='</div></td></tr>'
+r+='</table></form>'
+return r
+}
+
+function TX19() {
+return "0 to 19 characters"
+}
+function TX31() {
+return "0 to 31 characters"
+}
+function TX63() {
+return "0 to 63 characters"
+}
+
+function makeSelect(name,hod,values,names,poc) {
+  var r="",i
+  var an=names.split(';')
+  var ah=values.split(';')
+  r+='<select name="'+name+'" >'
+  for(i=0;i<poc;i++) {
+      r+='<option value="'+ah[i]+'" '
+      if(hod==ah[i]) {
+	  r+=" selected "
+      }
+      r+='>'+an[i]
+      r+='</option>'
+  }
+  r+='</select>'
+  return r
+}
+
+function CTBOXget(fn,idh,idv,b) {
+ var f=document.forms[fn]
+ var v=f[idh].value
+ if(v & b) f[idv].checked=true
+ else f[idv].checked=false
+}
+
+function CTBOXput(fn,idh,idv,b) {
+ var f=document.forms[fn]
+ var v=f[idh].value
+ if(f[idv].checked) v|=b
+ else v&=(b ^ 255)
+ f[idh].value=v 
+}
+
+function VHID(n,v) {
+  return '<input type="hidden" value="'+v+'" name="'+n+'" />'
+}
+
+function PGend() {
+ return '<p>&nbsp;</p><hr /></div></div>'
+}
+//#######################################################################
+function CHKchange(obj) {
+  var f=obj.form;
+  var n=obj.name.substr(3);
+  var o=f[n];
+  if(obj.checked) o.value="1";
+  else o.value="0";
+}
+function PUTchk(id,label,cs,v) {
+  var r="";
+  r+='<td colspan="'+cs+'" align="left">';
+  r+='<div align="left">';
+  r+='<input name="chk'+id+'" '; 
+      r+='type="checkbox" onchange="CHKchange(this);" '
+      if(v=="1") {
+	  r+=' checked ';
+      }    
+      r+='/>';
+  r+='&nbsp'+label;
+  r+='</div>';
+  r+='<input type="hidden" value="'+v+'" name="'+id+'" />'
+  r+='</td>';
+  return r;
+}
+function PUTchkOL(id,label,cs,v) {
+  var r="<tr>";
+  r+=PUTchk(id,label,cs,v);
+  r+='</tr>';
+  return r;
+}
+//#######################################################################
+function CHKBchange(obj) {
+  var f=obj.form;
+  var bit=parseInt(obj.name.substr(4,5));
+  var mask=(1<<bit);
+  var n=obj.name.substr(5);
+  //alert("CHKB bit=" +bit+ ", name=" +n);
+  var o=f[n];
+  var v=o.value;
+  if(obj.checked) v|=mask;
+  else v&=(mask ^ 255);
+  o.value=v;
+  //alert("CHKB bit=" +bit+ ", name=" +n+ ", val="+v);
+}
+//=================================================================
+/*
+function PUTchkBitOne(id,v,bit) {
+  var r,mask;
+  mask=(1<<bit);
+  name='chkb'+bit+id;
+  r+='<input name="'+name+'" '; 
+  r+='type="checkbox" onchange="CHKBchange(this);" '
+  if(v & mask) r+=' checked ';
+  r+='/>';
+  return r;
+}
+*/
+//=================================================================
+function PUTchkBits(id,v,df,cs,prefix,prclass) {
+  var i,name,pol,bit,mask;
+  var pols=df.split(";");
+  var r='<tr><td colspan="' + cs +'">';
+  r+='<table cellpadding="2" cellspacing="1">';
+  r+='<tr><td '
+  if(prclass!="") r+='class="'+prclass+'" '
+  r+='>'+prefix+'</td>';
+  //alert("CHKBS pols="+ pols.length);
+  
+  for(i=0;i<pols.length;i++) {
+    //r+='<td>'+i+'</td>';
+    r+='<td>';
+    pol=pols[i].split(",");
+    bit=parseInt(pol[1]);
+    mask=(1<<bit);
+    name='chkb'+pol[1]+id;
+    //alert("CHKBS pol[" + i+ "], name=" +name);
+    r+='<input name="'+name+'" '; 
+    r+='type="checkbox" onchange="CHKBchange(this);" '
+    if(v & mask) r+=' checked ';
+    r+='/>';
+    //r+='&nbsp'+pol[0];
+    r+=pol[0];
+    r+='</td>';
+  }
+  r+='<td></td></tr></table>';
+  r+='<input type="hidden" value="'+v+'" name="'+id+'" />';
+  r+='</td></tr>';
+  return r;
+}
+//=================================================================
+//function confirmLink(theLink, message) {
+//    var is_confirmed = confirm( message );
+//    if (is_confirmed) {
+//        theLink.href += '&is_js_confirmed=1';
+//    }
+//    return is_confirmed;
+//} 
+
+
+//=======================
+// -->

@@ -1,0 +1,91 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>State</title>
+<link href="style.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+#textBox {
+  width: 570px;
+  height: 60px;
+  border: 1px #000000 solid;
+  padding: 12px;
+  overflow: scroll;
+}
+#textBox #sourceText {
+  padding: 0;
+  margin: 0;
+  min-width: 498px;
+  min-height: 50px;
+}
+</style>
+
+<script language="JavaScript" src="scr1.html"></script>
+<script language="JavaScript">
+
+<!--
+//<script language="JavaScript" src="fajax.html"></script>
+//var objss0=JSON.parse('%AST60%');
+//var objss1=JSON.parse('%AST61%');
+
+function logDebug(tx) {
+  document.getElementById("debug").innerHTML += tx+'<br>';
+}
+function logDebugFocus() {
+  document.getElementById("debug").focus();
+}
+
+function Main() {
+var v,r='</head><body>';
+r+='<p id="debug"></p>'
+
+r+=HD1("State",5);
+
+r+=TB01("5","Reset");
+r+='<tr><td>Date:&nbsp%AST10%</td></tr>';
+r+='<tr><td>Counter:&nbsp%AST11%</td></tr>';
+r+='</table>';
+
+r+=TB01("5","Counters");
+r+='<tr><td>&nbsp</td><td colspan="2">read</td><td colspan="2">send</td></tr>';
+r+='<tr><td>&nbsp</td><td>total</td><td>day</td><td>total</td><td>day</td></tr>';
+r+='%AST20%';
+r+='</table>';
+
+r+=TB01("1","me Messages");
+r+='%AST40%';
+r+='%AST41%';
+r+='%AST42%';
+r+='%AST43%';
+r+='%AST44%';
+r+='%AST45%';
+r+='%AST46%';
+r+='%AST47%';
+r+='%AST48%';
+r+='%AST49%';
+r+='</table>';
+
+r+=TB01("1","SMS receive");
+r+=%AST50%
+r+='</table>';
+
+r+=TB01("1","SMS sending");
+r+='%AST51%';
+
+
+r+='</table>';
+
+r+=PGend();
+return r;
+}
+
+
+
+document.write(Main());
+//logDebug(JSON.stringify(objss0));
+//logDebug(JSON.stringify(objss1));
+
+//Start("status.xml", "");
+-->
+</script>
+
+</body></html>

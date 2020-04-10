@@ -1,0 +1,54 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Power Setup</title>
+<link href="style.css" rel="stylesheet" type="text/css" />
+<script language="JavaScript" src="scr1.html"></script>
+<script language="JavaScript">
+<!--
+function Main() {
+var r='</head><body>'
+r+=HD1("Power Setup",4)
+r+='<form name="smsoff" method="post" action="">'
+r+=TB10("OFF to SMS")
+r+=PUTchkOL("POW00","enabled",3,"%POW00%")
+r+=TB12("telef","POW01","%POW01%",TX20(),20)
+r+=TB12("message","POW02","%POW02%",TX64(),64)
+r+=TB21("SMSOFFsave")
+
+r+='<form name="smson" method="post" action="">'
+r+=TB10("ON to SMS")
+r+=PUTchkOL("POW03","enabled",3,"%POW03%")
+r+=TB12("telef","POW04","%POW04%",TX20(),20)
+r+=TB12("message","POW05","%POW05%",TX64(),64)
+r+=TB21("SMSONsave")
+
+r+='<form name="mailoff" method="post" action="">'
+r+=TB10("OFF to MAIL")
+r+=PUTchkOL("POW10","enabled",3,"%POW10%")
+r+=TB12("subject","POW11","%POW11%",TX32(),32)
+r+=TB12("recipient","POW12","%POW12%",TX32(),32)
+r+=TB12("message","POW13","%POW13%",TX64(),64)
+r+=TB21("MAILOFFsave")
+
+r+='<form name="mailon" method="post" action="">'
+r+=TB10("ON to MAIL")
+r+=PUTchkOL("POW14","enabled",3,"%POW14%")
+r+=TB12("subject","POW15","%POW15%",TX32(),32)
+r+=TB12("recipient","POW16","%POW16%",TX32(),32)
+r+=TB12("message","POW17","%POW17%",TX64(),64)
+r+=TB21("MAILONsave")
+
+r+='<form name="test" method="post" action="">'
+r+=TB10("TEST")
+r+=PUTchkOL("POW40","enabled",3,"%POW40%")
+r+=PUTchkOL("POW41","state ON",3,"%POW41%")
+r+=TB21("TESTsave")
+
+r+=PGend()
+return r
+}
+document.write(Main());
+//--> 
+</script>
+</body></html>

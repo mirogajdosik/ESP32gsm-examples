@@ -1,0 +1,89 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>System</title>
+<link href="style.css" rel="stylesheet" type="text/css" />
+<script language="JavaScript" src="scr1.html"></script>
+<script language="JavaScript">
+<!--
+
+function MKres() {
+ if(window.confirm("Restart right now?")) document.rst.submit() 
+}
+function MKdel(n) {
+ var fn;
+ switch(n) {
+ case 1:
+    fn="/smsrecv.txt";
+    break;
+ case 2:
+    fn="/smssend.txt";
+    break;
+ case 3:
+    fn="/msg.txt";
+    break;
+ case 4:
+    fn="/event.txt";
+    break;
+ default:
+    return;
+ }
+ var f=document.forms["del"];
+ f["Fname"].value=fn;
+ if(window.confirm("Delete file: "+fn+" now?")) document.del.submit() 
+}
+function Mhref(lb,fn,isdel) {
+  var r='<tr>';
+  r+='<td class="nd">'+lb+'</td>';
+  r+='<td><a href="'+fn+'">'+fn+'</a></td>';
+  if(isdel) {
+    r+='<td><div align="center">';
+    r+='<input type="button" value="Del" class="butsave" ';
+    r+='onclick="MKdel('+isdel+');" enabled >';
+    r+='</div></td>';
+  }
+  r+='</tr>';
+  return r;
+}
+
+function Main() {
+var r='</head><body>';
+r+=HD1("System",6);
+
+r+=TB01(2,"System");
+r+='<tr><td colspan="2">';
+r+='<div align="center">';
+r+='<input type="button" value="Restart" class="butsave" ';
+r+='onclick="MKres();" enabled >';
+r+='</div></td></tr>';
+
+r+=Mhref("Status values in XML","status.xml",0);
+r+=Mhref("Docum 1","esp32sim800.pdf",0);
+r+='<tr><td class="nd">FTP</td>';
+r+='<td><a href="ftp://%MAINIP%">FTP</a></td></tr>';
+r+='</table>';
+
+r+=TB01(3,"Log");
+r+=Mhref("SMS recv","smsrecv.txt",1);
+r+=Mhref("SMS send","smssend.txt",2);
+r+=Mhref("MESSAGE","msg.txt",3);
+r+=Mhref("EVENT","event.txt",4);
+r+='</table>';
+
+
+r+='<form name="rst" method="post" action="sysRESET">';
+r+='<input type="hidden" value="123" name="RESET" />';
+r+='</form>';
+
+r+='<form name="del" method="post" action="sysDELETE">';
+r+='<input type="hidden" value="123" name="Fname" />';
+r+='</form>';
+
+r+=PGend();
+return r;
+}
+document.write(Main());
+//--> 
+</script>
+</body></html>
+

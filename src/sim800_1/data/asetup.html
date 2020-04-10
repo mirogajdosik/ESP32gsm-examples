@@ -1,0 +1,67 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>General Setup</title>
+<link href="style.css" rel="stylesheet" type="text/css" />
+<script language="JavaScript" src="scr1.html"></script>
+<script language="JavaScript">
+<!--
+function MKres() {
+ if(window.confirm("Restart right now?")) document.rst.submit() 
+}
+function Main() {
+var r='</head><body>'
+r+=HD1("General Setup",1)
+r+='<form name="ip" method="post" action="">'
+r+=TB3("Network")
+r+=TBV3("ssid","NET01","%NET01%",TX31(),31)
+r+=TBV3p("pasword","NET02","%NET02%",TX19(),19)
+r+=TBV3("mDNS Name","NET03","%NET03%",TX31(),31)
+r+=PUTchkOL("NET09","IPstatic",3,"%NET09%")
+r+=TBV3("IP Address","NET04","%NET04%","A.B.C.D",16)
+r+=TBV3("Network Mask","NET05","%NET05%","A.B.C.D",16)
+r+=TBV3("Gateway","NET06","%NET06%","A.B.C.D",16)
+r+=TBV3("Dns","NET07","%NET07%","A.B.C.D",16)
+r+=TBV3("SNTP Server","NET08","%NET08%",TX31(),31)
+r+=TB21("NETsave")
+
+r+='<form name="mqtt" method="post" action="">'
+r+=TB3("MQTT")
+r+=PUTchkOL("MQT00","Enabled",3,"%MQT00%")
+r+=TBV3("Server","MQT01","%MQT01%","A.B.C.D",16)
+r+=TBV3("DEVname","MQT02","%MQT02%",TX31(),31)
+r+=TBV3("GLOBname","MQT03","%MQT03%",TX31(),31)
+r+=TBV3("User","MQT04","%MQT04%",TX19(),19)
+r+=TBV3p("Password","MQT05","%MQT05%",TX19(),19)
+r+=TBV3("refresh status","MQT06","%MQT06%","sec",6)
+r+=TBV3("refresh sensor","MQT07","%MQT07%","sec",6)
+r+=TB21("MQTTsave")
+
+r+='<form name="user" method="post" action="">'
+r+=TB3("Security: Device Admin")
+r+='<tr><td>Username</td>'
+r+='<td><input class="mytx16" name="WEB01" type="text" value="%WEB01%" maxlength="19" /></td>'
+r+='<td class="desc" rowspan="2">Admin username/password for device configuration changes<br />'
+r+='[0 to 19 characters]</td></tr>'
+r+='<tr><td>Password</td>'
+r+='<td><input class="mytx16" name="WEB02" type="password" value="%WEB02%" maxlength="19" /></td></tr>'
+r+=TB21("SECsave")
+
+r+=TB01(1,"Restart")
+r+='<td><div align="center">'
+r+='<input type="button" value="Restart" class="butsave" '
+r+='onclick="MKres();" enabled >'
+r+='</div></td></tr>'
+r+='</table>'
+
+r+='<form name="rst" method="post" action="">'
+r+='<input type="hidden" value="123" name="RESET" />'
+r+='</form>'
+
+r+=PGend()
+return r
+}
+document.write(Main());
+//--> 
+</script>
+</body></html>

@@ -1,0 +1,209 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Event Setup</title>
+<style>
+body {
+  background-color: #BBBBBB;
+  margin: 0px;
+  padding: 0px;
+  font-family: Tahoma, Verdana, Arial, Helvetica, sans-serif;
+  font-size: 0.8em;
+  color: #005E8A;
+  line-height: 1.1em;
+  font-weight: normal;
+  font-style: normal;
+}
+h1 {
+  color: #AAAAAA;
+  font-size: 3.2em;
+  margin-bottom: 15px;
+  margin-top: 0px;
+  background-color: #FF9933;
+  line-height: 1.5em;
+  font-style: italic;
+}
+.Htop {
+  font-size: 0.8em;
+  color: #DDDDDD;
+}
+
+/* menu */
+.menu a {
+  color: #666666;
+  font-size: 1.1em;
+  padding: 2px;
+}
+.menu a:hover {
+  color: #000000;
+}
+.menu_o {
+  background-color: #CDDFFE;
+}
+/* menu */
+a {
+  color: #005E8A;
+}
+a:hover {
+  color: black;
+  text-decoration: none;
+}
+div.page {
+  width: 70em;
+  background-color: #AAAAAA;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 0px;
+  text-align: center;
+  padding: 2em;
+  margin-bottom: 0px;
+  height: auto;
+}
+hr {
+  color: #005E8A;
+  height: 2px;
+  border: none;
+  clear: both;
+  background-color: #005E8A;
+}
+.table_top {
+  background-color: #ACCBFD;
+  font-weight: bold;
+  color: #005E8A;
+  text-align: center;
+}
+input {
+  text-align: center;
+  font-family: Tahoma, Verdana, Arial, Helvetica, sans-serif;
+  font-size: 1em;
+}
+select {
+  text-align: center;
+  font-family: Tahoma, Verdana, Arial, Helvetica, sans-serif;
+  font-size: 1em;
+}
+.nd {
+  color: #000000;
+  font-weight: bold;
+}
+
+</style>
+
+<script language="JavaScript" src="scr1.html"></script>
+<script language="JavaScript">
+<!--
+var test1=0;
+var xvals="%EVT01%,%EVT02%,%EVT03%,%EVT04%,%EVT05%,%EVT06%,%EVT07%,%EVT08%;"
+xvals+="%EVT11%,%EVT12%,%EVT13%,%EVT14%,%EVT15%,%EVT16%,%EVT17%,%EVT18%;"
+xvals+="%EVT21%,%EVT22%,%EVT23%,%EVT24%,%EVT25%,%EVT26%,%EVT27%,%EVT28%;"
+xvals+="%EVT31%,%EVT32%,%EVT33%,%EVT34%,%EVT35%,%EVT36%,%EVT37%,%EVT38%;"
+
+
+
+function TBx12(label,n,v,m) {
+var r='<tr><td width="160">'+label+'</td>'
+r+='<td width="440">'
+r+='<input name="'+n+'" type="text" value="'+v+'" maxlength="'+m+'" />';
+r+='</td></tr>'
+return r
+}
+function TBx12sel(label,n,v,values,names,poc) {
+var r='<tr><td width="160">'+label+'</td>'
+var an=names.split(';')
+var ah=values.split(';')
+r+='<td width="440">';
+r+='<select name="'+n+'" >'
+for(i=0;i<poc;i++) {
+      r+='<option value="'+ah[i]+'" '
+      if(v==ah[i]) {
+	  r+=" selected "
+      }
+      r+='>'+an[i]
+      r+='</option>'
+}
+r+='</select>'
+r+='</td></tr>';
+return r;
+}
+
+
+function TBx21(n,cs) {
+var r='<tr><td colspan="'+cs+'"><div align="center">'
+r+='<input type="submit" name="'+n+'" value="Save" class="butsave" enabled />'
+r+='</div></td></tr>'
+r+='</table></form>'
+return r
+}
+function PUTchkBitOne(label,id,v,bit) {
+  var r="",mask;
+  mask=(1<<bit);
+  name='chkb'+bit+id;
+  r+='<tr><td class="nd" >'+label+'</td>';
+  r+='<td>';
+  r+='<input name="'+name+'" '; 
+  r+='type="checkbox" onchange="CHKBchange(this);" '
+  if(v & mask) r+=' checked ';
+  r+='/>';
+  r+='</td></tr>';
+  return r;
+}
+
+function makeEvent(n) {
+  var v1=xvals.split(";");
+  var v2=v1[n];
+  var vv=v2.split(",");
+  var prn ="EVT"+(n);
+  
+  n++;
+  
+  var df,r='<form name="evt"'+n+' method="post" action="">';
+  r+=TB01(2,"Event "+n+" ");
+  if(test1) r+=TBx12("cfg","x"+prn+"1",vv[0],4);
+  r+=PUTchkBitOne("Invert",prn+"1",vv[0],7);
+  r+=PUTchkBitOne("Test state",prn+"1",vv[0],6);
+  df="sms,0;mail,1;mqtt,2;file,3;dst1,4;dst2,5";
+  r+=PUTchkBits(prn+"1",vv[0],df,2,"Action","nd");
+  if(test1) r+=TBx12("func","x"+prn+"2",vv[1],3);
+  r+=TBx12sel("Function",prn+"2",vv[1],"0;100;101;102;103;104;32;33;34;35","off;test;power;lev75\x25;lev50\x25;lev25\x25;inp32;inp33;inp34;inp35",10);
+
+  r+=TBx12("Rdelay",prn+"3",vv[2],3);
+  r+=TBx12("Free",prn+"4",vv[3],3);
+
+  r+=TBx12("Vmin",prn+"5",vv[4],5);
+  r+=TBx12("Vmax",prn+"6",vv[5],5);
+
+  
+  r+=TBx12("Subject",prn+"7",vv[6],19);
+  r+=TBx12("Message",prn+"8",vv[7],19);
+  r+=TBx21(prn+"save",2);
+  return r;
+}
+
+//##########################################################################
+function Main() {
+var i,df,r='</head><body>';
+r+=HD1("Event Setup",4);
+r+='<form name="dest1" method="post" action="">';
+r+=TB01(2,"Destination 1");
+r+=TBx12("telef","DST01","%DST01%",19);
+r+=TBx12("recipient","DST02","%DST02%",31);
+r+=TBx21("DST1save",2);
+
+r+='<form name="dest2" method="post" action="">';
+r+=TB01(2,"Destination 2");
+r+=TBx12("telef","DST11","%DST11%",19);
+r+=TBx12("recipient","DST12","%DST12%",31);
+r+=TBx21("DST2save",2);
+
+for(i=0;i<4;i++) {
+  r+=makeEvent(i);
+}
+
+
+r+=PGend()
+return r
+}
+document.write(Main());
+//--> 
+</script>
+</body></html>

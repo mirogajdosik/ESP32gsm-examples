@@ -1,0 +1,78 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Email Setup</title>
+<link href="style.css" rel="stylesheet" type="text/css" />
+<script language="JavaScript" src="scr1.html"></script>
+<script language="JavaScript">
+<!--
+function MKres() {
+ if(window.confirm("Restart right now?")) document.rst.submit() 
+}
+function Main() {
+var df,r='</head><body>'
+r+=HD1("Email Setup",3)
+r+='<form name="smtp" method="post" action="">'
+r+=TB3("SMTP")
+//r+=TB14("enabled","SMTP00",%SMTP00%)
+r+=PUTchkOL("SMTP00","enabled",3,"%SMTP00%")
+r+=TBV3("server name","SMTP01","%SMTP01%",TX31(),31)
+r+=TBV3("server port","SMTP02","%SMTP02%","587",5)
+r+=TBV3("user name","SMTP03","%SMTP03%",TX31(),31)
+r+=TBV3p("password","SMTP04","%SMTP04%",TX19(),19)
+r+=TBV3("sender name","SMTP05","%SMTP05%",TX31(),31)
+r+=TBV3("subject","SMTP06","%SMTP06%",TX31(),31)
+r+=TBV3("recipient","SMTP07","%SMTP07%",TX31(),31)
+df="lev1,0;lev2,1";
+r+=PUTchkBits("SMTP10","%SMTP10%",df,3,"debug>>");
+r+=TB21("SMTPsave")
+
+r+='<form name="pop3" method="post" action="">'
+r+=TB3("POP3")
+r+=PUTchkOL("POP00","enabled",3,"%POP00%")
+r+=TBV3("server name","POP01","%POP01%",TX31(),31)
+r+=TBV3("server port","POP02","%POP02%","110",5)
+r+=TBV3("user name","POP03","%POP03%",TX31(),31)
+r+=TBV3p("password","POP04","%POP04%",TX19(),19)
+r+=TBV3("subject","POP05","%POP05%",TX31(),31)
+r+=TBV3("reread","POP06","%POP06%","second",4)
+r+=PUTchkOL("POP07","to file",3,"%POP07%")
+r+=PUTchkOL("POP08","to sms",3,"%POP08%")
+r+=PUTchkOL("POP09","to mqtt",3,"%POP09%")
+//r+=TB12("debug","xPOP10","%POP10%","...",32)
+df="lev1,0;lev2,1;main,2;all,3";
+r+=PUTchkBits("POP10","%POP10%",df,3,"debug>>");
+r+=TB21("POPsave")
+
+if(%IMAPdf%) {
+r+='<form name="imap" method="post" action="">'
+r+=TB3("IMAP")
+r+=PUTchkOL("IMAP00","enabled",3,"%IMAP00%")
+r+=TBV3("server name","IMAP01","%IMAP01%",TX31(),31)
+r+=TBV3("server port","IMAP02","%IMAP02%","993",5)
+r+=TBV3("user name","IMAP03","%IMAP03%",TX31(),31)
+r+=TBV3p("password","IMAP04","%IMAP04%",TX19(),19)
+r+=TBV3("subject","IMAP05","%IMAP05%",TX31(),31)
+df="lev1,0;lev2,1";
+r+=PUTchkBits("IMAP10","%IMAP10%",df,3,"debug>>");
+r+=TB21("IMAPsave")
+}
+
+r+=TB01(1,"System Restart")
+r+='<td><div align="center">'
+r+='<input type="button" value="Restart" class="butsave" '
+r+='onclick="MKres();" enabled >'
+r+='</div></td></tr>'
+r+='</table>'
+
+r+='<form name="rst" method="post" action="">'
+r+='<input type="hidden" value="123" name="RESET" />'
+r+='</form>'
+
+r+=PGend()
+return r
+}
+document.write(Main());
+//--> 
+</script>
+</body></html>
