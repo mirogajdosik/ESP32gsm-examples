@@ -1,3 +1,5 @@
 # ESP32gsm-examples
-SMS MAIL MQTT gateway
-see screenshots and esp32sim800.pdf
+
+SMS MAIL MQTT gateway.
+
+See screenshots and esp32sim800.pdf
